@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Employee</title>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+            <li><a id="Remove"
+                   onclick="removeEmployee()" name="action">Remove
+            </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Employee Details</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <form class="col s12" id="reg-form">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="empFirstName" type="text" class="validate" required>
+                    <label id="lblEmpFirstName" for="empFirstName">First Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="last_name" type="text" class="validate" required>
+                    <label for="last_name">Last Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="emailRegUser" type="email" class="validate" required>
+                    <label for="emailRegUser">Email</label>
+                </div>
+            </div>
+            <div class="input-field col s6">
+                <a class="btn waves-effect waves-light" id="appRegisterUser"
+                   onclick="updateEmployee()">Update</a>
+            </div>
+        </form>
+    </div>
+    <!-- <a title="Login" class="ngl btn-floating btn-large waves-effect waves-light red"><i class="material-icons">input</i></a>-->
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="../server/firebase.main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+
+    function removeEmployee(){
+        const regEmail = document.getElementById("emailRegUser").value;
+
+        var data = {
+            "regemail": regEmail
+        }
+        fetch('http://localhost:3002/api/deleteEmployee', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+            //alert(" Employee created with ID = " + data._id);
+        })
+    }
+
+    function updateEmployee() {
+        const firstName = document.getElementById("empFirstName").value;
+        const lastName = document.getElementById("last_name").value;
+        const regEmail = document.getElementById("emailRegUser").value;
+
+        var data = {
+            "firstname": firstName,
+            "lastname": lastName,
+            "regemail": regEmail
+        };
+        fetch('http://localhost:3002/api/updateUser', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+            //alert(" Employee created with ID = " + data._id);
+        })
+
+    }
+</script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+</body>
+</html>

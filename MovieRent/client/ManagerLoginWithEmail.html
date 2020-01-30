@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Login With Email</title>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+    </div>
+</nav>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">User Login</h1>
+    </div>
+</div>
+<div class="container">
+    <form class="col s12" id="user-login">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="emailLoginUser" type="email" class="validate" required>
+                <label for="emailLoginUser">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="pwdLoginUser" type="password" class="validate" minlength="6" required>
+                <label for="pwdLoginUser">Password</label>
+            </div>
+        </div>
+        <div class="input-field col s6">
+            <a class="btn waves-effect waves-light" id="appLoginUser"
+               onclick="loginUser()">Submit</a>
+
+        </div>
+    </form>
+</div>
+<script>
+    function loginUser() {
+        const emailLogin = document.getElementById("emailLoginUser").value;
+        const pwdLogin = document.getElementById("pwdLoginUser").value;
+        loginSpecificUser(emailLogin, pwdLogin);
+        var data = {
+            "email": emailLogin
+        };
+        fetch('http://localhost:3002/api/getManagerUserRole', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+
+            console.log(res);
+            if (res.status == 500) {
+                alert('Incorrect Login')
+            } else {
+                if (getCurrentUser()) {
+                    sessionStorage.setItem("managerMail", emailLogin);
+                    window.location.href = './manager.html';
+                }
+            }
+
+        }).catch((err) => {
+            console.log('Inside error');
+            console.log(err);
+        });
+
+    }
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="../server/firebase.main.js"></script>
+</body>
+</html>

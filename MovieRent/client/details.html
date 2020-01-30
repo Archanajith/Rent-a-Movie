@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Update Production House</title>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Production House Details</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <form class="col s12" id="reg-form">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="name" type="text" class="validate" required>
+                    <label for="name">Name of the Production House</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="description" type="text" class="validate" required>
+                    <label for="description">Established Year</label>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="input-field col s6 center">
+        <div class="input-field col s6">
+            <button class="btn btn-large btn-register waves-effect waves-light" type="submit"
+                    onclick="updateProductionHouse()" name="action">Update
+                <i class="material-icons right">done</i>
+            </button>
+            <button class="btn btn-large btn-register waves-effect waves-light" type="submit"
+                    onclick="removeProductionHouse()" name="action">Remove
+                <i class="material-icons right">done</i>
+            </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="../server/firebase.main.js"></script>
+
+</body>
+</html>
+

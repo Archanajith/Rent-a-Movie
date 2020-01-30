@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>View All Orders</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">View All Orders</h1>
+    </div>
+</div>
+
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script>
+
+</script>
+<script>
+    function getMovieDetail(movieId) {
+        sessionStorage.setItem("movieId", movieId);
+        window.location.href = './MovieDetail.html';
+    }
+</script>
+<script>
+    let table = '';
+    let rows = 500;
+    let columns = 8;
+    for (let r = 0; r < rows; r++) {
+        // table += '<a onclick="getUserId(id)" ;
+        table += '<tr class="row" onclick="getMovieDetail(id)" id=' + r + '>';
+        for (let c = 0; c < columns; c++) {
+            table += '<td>' + c + '</td>';
+
+        }
+        table += '</tr>';
+    }
+    document.write(
+        '<div class="container"><table id="viewAllOrders" class="highlight centered"><thead>' +
+        '<tr><th>Item</th><th>Quantity</th><th>Order Date</th><th>Return Date</th><th>Amount</th>' +
+        '<th>Coupon</th><th>Count</th><th>Customer</th></tr></thead>' + table
+        + '</table></div>');
+</script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="../server/firebase.main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+</body>
+
+</html>

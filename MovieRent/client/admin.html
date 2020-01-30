@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<nav>
+    <div class="nav-wrapper">
+        <ul>
+            <li><a class="waves-effect waves-light btn" href="./MovieSearch.html">Movies<i
+                    class="material-icons right">movies</i></a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div class="section">
+        <div class="row">
+            <a class="waves-effect waves-light btn" href="./GetAllUsers.html">Get All Users</a>
+        </div>
+        <div class="row">
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./AddMovie.html">
+                    <i class="material-icons">add</i>Add
+                    Movie</a>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./AdminMovieSearch.html">
+                    <i class="material-icons">edit</i>Edit/Delete
+                    Movie</a>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./AddCoupon.html">
+                    <i class="material-icons">add</i>Add Coupons</a>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./CouponDetails.html" id="EditMovie">
+                    <i class="material-icons">edit</i>Edit/Delete
+                    Coupons</a>
+            </div>
+        </div>
+        <div class="input-field col s6">
+            <a class="btn waves-effect waves-light" id="addUser"
+               href="./RegisterNewUser.html"><i class="material-icons">add</i>Add Customer</a>
+        </div>
+
+        <div class="row">
+
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./AddEmployee.html">
+                    <i class="material-icons">add</i>Add Employee</a>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./EmployeeDetails.html">
+                    <i class="material-icons">edit</i>Edit/Delete User</a>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./AddRole.html">
+                    <i class="material-icons">add</i>Add Roles</a>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./AddRoleUser.html">
+                    <i class="material-icons">edit</i>Assign Roles</a>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./AddProductionHouse.html">
+                    <i class="material-icons">add</i>Add Production House</a>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./ProductionHouseDetails.html">
+                    <i class="material-icons">edit</i>Edit/Update Production House</a>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="icon-block">
+                <a class="waves-effect waves-light btn" href="./Genre.html">
+                    <i class="material-icons">add</i>Add Genre</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="../server/firebase.main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>New User Registration</title>
+</head>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+    </div>
+</nav>
+<body>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">New User Registration</h1>
+    </div>
+</div>
+<div class="container">
+    <form class="col s12" id="reg-form">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate" required>
+                <label for="first_name">First Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate" required>
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="emailRegUser" type="email" class="validate" required>
+                <label for="emailRegUser">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="dob" type="text" class="validate" required>
+                <label for="dob">Date of Birth</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="passwordRegUser" type="password" class="validate" minlength="6" required>
+                <label for="passwordRegUser">Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="address1-street1" type="text" class="validate" required>
+                <label for="address1-street1">Street 1</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="address1-street2" type="text" class="validate" required>
+                <label for="address1-street2">Street 2</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <input id="address1-city" type="text" class="validate" required>
+                <label for="address1-city">City</label>
+            </div>
+            <div class="input-field col s4">
+                <input id="address1-state" type="text" class="validate" required>
+                <label for="address1-state">State</label>
+            </div>
+            <div class="input-field col s4">
+                <input id="address1-Zip" type="text" class="validate" required>
+                <label for="address1-Zip">Zip</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="phone1-basic" type="text" class="validate" required>
+                <label for="phone1-basic">Mobile Number</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="phone1-primary" type="text" class="validate" required>
+                <label for="phone1-primary">Primary Phone Number</label>
+            </div>
+        </div>
+        <div class="input-field col s6">
+            <a class="btn waves-effect waves-light" id="appRegisterUser"
+               onclick="createUser()">Submit</a>
+
+        </div>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script>
+    function createUser() {
+        const firstName = document.getElementById("first_name").value;
+        const lastName = document.getElementById("last_name").value;
+        const dob = document.getElementById("dob").value;
+        const address1city = document.getElementById("address1-city").value;
+        const address1street1 = document.getElementById("address1-street1").value;
+        const address1street2 = document.getElementById("address1-street2").value;
+        const address1state = document.getElementById("address1-state").value;
+        const address1Zip = document.getElementById("address1-Zip").value;
+        const regEmail = document.getElementById("emailRegUser").value;
+        const regPassword = document.getElementById("passwordRegUser").value;
+        const phone = document.getElementById("phone1-basic").value;
+        const phonePrimary = document.getElementById("phone1-primary").value;
+        createUserWithEmail(regEmail, regPassword);
+
+        var data = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "dob": dob,
+            "address1street1": address1street1,
+            "address1street2": address1street2,
+            "address1city": address1city,
+            "address1state": address1state,
+            "phone1basic": phone,
+            "phone1primary": phonePrimary,
+            "regEmail": regEmail,
+            "regPassword": regPassword,
+            "zip": address1Zip
+        };
+        fetch('http://localhost:3002/api/postCustomer', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+            //alert(" Employee created with ID = " + data._id);
+        })
+
+    }
+</script>
+<script src="../server/firebase.main.js"></script>
+</body>
+</html>

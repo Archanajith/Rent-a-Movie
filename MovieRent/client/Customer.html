@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Customer Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body onload="loadOrder()">
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="input-field col s6 center">
+    <a class="btn waves-effect waves-light" href="./MovieSearch.html">Search Movie</a>
+    <a class="btn waves-effect waves-light" href="./MovieRecommendation.html">Movie Recommender</a>
+
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col s12 centered">
+            Available Balance
+            <div class="input-field inline">
+                <input disabled id="email_inline" type="email" class="validate">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table id="table">
+            <thead>
+            <tr>
+                <th>Movie ID</th>
+                <th>Order Date</th>
+                <th>Return Date</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function loadOrder() {
+        let email = sessionStorage.getItem("userEmail");
+        var data = {
+            "id": email,
+        };
+        fetch('http://localhost:3002/api/getAllOrdersForCustomer', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log(data);
+
+            let table = '';
+            let rows = data.length;
+            let columns = 2;
+            for (let r = 0; r < rows; r++) {
+
+                table += '<tr class="row" id=' + data[r]._id + '>';
+                table += '<td>' + data[r].item + '</td>';
+                table += '<td>' + data[r].orderdate + '</td>';
+                table += '<td>' + data[r].returndate + '</td>';
+                table += '</tr>';
+            }
+            $('#table').find('tbody').empty();
+            $("#table").append(table);
+
+        })
+    }
+
+</script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="../server/firebase.main.js"></script>
+</body>
+
+</html>

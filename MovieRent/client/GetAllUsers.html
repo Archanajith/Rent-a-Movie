@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Get All Users</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+<body onload="loadData()">
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Get All Users</h1>
+    </div>
+</div>
+<div class="row">
+        <table id="table" >
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                </tr>
+            </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+</div>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => appLogout());
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+ function loadData(){
+     fetch('http://localhost:3002/api/getEmployee').then((r) =>{
+         console.log(r);
+       return r.json();
+     }).then(data => {
+
+        console.log("data " + data);
+        let table = '';
+        let rows = data.length;
+        console.log("rows "+ rows); 
+        let columns = 5;
+
+        data.map((e) => {
+            table += '<tr class="row"  id=' + e._id + '>';
+            table += '<td>' + e.firstname + '</td>';
+            table += '<td>' + e.lastname + '</td>';
+            table += '<td>' + e.email + '</td>';
+            table += '<td>' + e.dateofbirth + '</td>';
+            table += '</tr>';
+                 });
+        $('#table').find('tbody').empty();
+      $("#table").append(table);
+     })
+ }
+    </script>
+</body>
+</html>

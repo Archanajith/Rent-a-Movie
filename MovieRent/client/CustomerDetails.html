@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>New User Registration</title>
+</head>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+    </div>
+</nav>
+<body>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Details</h1>
+    </div>
+</div>
+<div class="container">
+    <form class="col s12" id="reg-form" color="white">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate" required>
+                <label for="first_name">First Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate" required>
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="emailRegUser" type="email" class="validate" required>
+                <label for="emailRegUser">Email</label>
+            </div>
+        </div>
+               <div class="input-field col s6 center">
+            <div class="input-field col s6">
+                <a class="btn waves-effect waves-light" id="updateUser"
+                   onclick="updateCustomer()">Update</a>
+                <a class="btn waves-effect waves-light" href="./GetAllUsers.html">Back</a>
+                <a class="btn waves-effect waves-light" id="remove"
+                   onclick="removeCustomer()">Remove</a>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script>
+    function updateCustomer() {
+
+    }
+</script>
+<script>
+    function removeCustomer() {
+       
+    }
+</script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+</body>
+</html>

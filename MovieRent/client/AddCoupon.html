@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Add Coupon</title>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Add Coupon</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <form class="col s12" id="reg-form">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="name" type="text" class="validate">
+                    <label for="name">Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="discount" type="text" class="validate">
+                    <label for="discount">Discount</label>
+                </div>
+            </div>
+
+            <div class="input-field col s6">
+                <a class="waves-effect waves-light btn" onclick="addCoupon()">Add</a>
+                
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <a title="Login" class="ngl btn-floating btn-large waves-effect waves-light red"><i class="material-icons">input</i></a>-->
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => appLogout());
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    function addCoupon() {
+        let name = document.getElementById("name").value;
+        let discount = document.getElementById("discount").value;
+
+        console.log(name + discount);
+        var data = {
+            "name": name,
+            "discount": discount
+        }
+        fetch('http://localhost:3002/api/postCoupon', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then((data) => {
+            console.log(data)
+            alert(" Coupon created with ID = " + data._id);
+        })
+    }
+</script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+</body>
+</html>

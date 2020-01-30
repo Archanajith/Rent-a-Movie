@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head onload="switchManagerClass()">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Add Employee</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <form class="col s12" id="reg-form">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="first_name" type="text" class="validate" required>
+                    <label for="first_name">First Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="last_name" type="text" class="validate" required>
+                    <label for="last_name">Last Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" type="email" class="validate" required>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="dob" type="text" class="validate" required>
+                    <label for="dob">Date of Birth</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate" minlength="6" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="address1-street1" type="text" class="validate" required>
+                    <label for="address1-street1">Street 1</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="address1-street2" type="text" class="validate" required>
+                    <label for="address1-street2">Street 2</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <input id="address1-city" type="text" class="validate" required>
+                    <label for="address1-city">City</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="address1-state" type="text" class="validate" required>
+                    <label for="address1-state">State</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="address1-Zip" type="text" class="validate" required>
+                    <label for="address1-Zip">Zip</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="phone1-basic" type="text" class="validate" required>
+                    <label for="phone1-basic">Mobile Number</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="phone1-primary" type="text" class="validate" required>
+                    <label for="phone1-primary">Primary Phone Number</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="emp-key" type="text" class="validate" required>
+                    <label for="emp-key">Employee Key</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="start-date" type="text" class="validate" required>
+                    <label for="start-date">Start Date</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <p>
+                        <label>
+                            <input id="managerAssigned" type="checkbox" class="filled-in"
+                                   onclick="switchManagerClass() "/>
+                            <span>Is Manager Assigned</span>
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6" id="txtManager">
+                    <input id="manager-name" type="text" class="validate" c>
+                    <label for="manager-name">Manager Email</label>
+                </div>
+            </div>
+            <div class="input-field col s6">
+                <a class="btn waves-effect waves-light" id="appRegisterUser"
+                   onclick="createEmployee()">Add</a>
+
+            </div>
+        </form>
+    </div>
+    <!-- <a title="Login" class="ngl btn-floating btn-large waves-effect waves-light red"><i class="material-icons">input</i></a>-->
+</div>
+<script>
+    function switchManagerClass() {
+        let obj = document.getElementById("managerAssigned");
+        let managerName = document.getElementById("manager-name");
+        if (obj.checked) {
+            managerName.removeAttribute("disabled");
+        } else {
+            managerName.setAttribute("disabled", 'true');
+        }
+    }
+</script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => appLogout());
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    function createEmployee() {
+        const firstName = document.getElementById("first_name").value;
+        const lastName = document.getElementById("last_name").value;
+        const dob = document.getElementById("dob").value;
+        //const passwordRegUser=document.getElementById("password").value;
+        const address1street1 = document.getElementById("address1-street1").value;
+        const address1street2 = document.getElementById("address1-street2").value;
+        const address1city = document.getElementById("address1-city").value;
+        const address1state = document.getElementById("address1-state").value;
+        const phone1basic = document.getElementById("phone1-basic").value;
+        const phone1primary = document.getElementById("phone1-primary").value;
+        const managername = document.getElementById("manager-name").value;
+        const empkey = document.getElementById("emp-key").value;
+        const startdate = document.getElementById("start-date").value;
+        const regEmail = document.getElementById("email").value;
+        const regPassword = document.getElementById("password").value;
+        const zip = document.getElementById("address1-Zip").value;
+        // const city = document.getElementById("address1-Zip").value;
+
+        createUserWithEmail(regEmail, regPassword);
+
+        var data = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "dob": dob,
+            "address1street1": address1street1,
+            "address1street2": address1street2,
+            "address1city": address1city,
+            "address1state": address1state,
+            "phone1basic": phone1basic,
+            "phone1primary": phone1primary,
+            "empkey": empkey,
+            "startdate": startdate,
+            "regEmail": regEmail,
+            "regPassword": regPassword,
+            "manager": managername,
+            "zip": zip
+        };
+        fetch('http://localhost:3002/api/postEmployee', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+            //alert(" Employee created with ID = " + data._id);
+        })
+
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="../server/firebase.main.js"></script>
+</body>
+</html>

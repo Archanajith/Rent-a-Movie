@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Movie By Production House</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body onload="myFunction()">
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="index-banner">
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Get My Employees</h1>
+        <div class="row">
+
+            <div>
+                <ul id="listMovies">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    function myFunction() {
+        var email = sessionStorage.getItem("managerMail");
+        console.log("email " + email);
+        var data = {
+            "email": email
+        };
+
+        fetch('http://localhost:3002/api/getEmployeeForManager', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            console.log(response);
+            return response.json();
+        }).then((data) =>{
+
+            var ul = document.getElementById("listMovies");
+            ul.innerHTML = '';
+            console.log(data);
+            data.map((el) => {
+                var li = document.createElement('li');
+                ul.appendChild(li);
+                li.innerHTML = li.innerHTML + JSON.stringify(el.email);
+            })
+        })
+    }
+</script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="../server/firebase.main.js"></script>
+</body>
+</html>

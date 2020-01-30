@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Movie By Production House</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src='../server/daos/movie.dao.server.js'></script>
+
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="index-banner">
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Production House Movies</h1>
+        <div class="row">
+            <h3>Enter a movie name to Movies</h3>
+            <div class="input-field col s6">
+                <input id="production_house" type="text" required>
+
+            </div>
+            <div class="input-field col s6">
+                <a id="btnGetMovie" onclick="myFunction()" class="waves-effect waves-light btn">Get
+                    Movies For Production House</a>
+
+                <a class="waves-effect waves-light btn-large" href="./manager.html">Back</a>
+            </div>
+            <div>
+                <ul id="listMovies">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function myFunction() {
+        var t = document.getElementById("production_house").value;
+        var data = {
+            "name": t,
+        };
+        fetch('http://localhost:3002/api/getMovieByProductionHouse', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then(data =>{
+            var ul = document.getElementById("listMovies");
+            ul.innerHTML = '';
+            console.log(data);
+            data.map((el) => {
+                var li = document.createElement('li');
+                ul.appendChild(li);
+                li.innerHTML = li.innerHTML + JSON.stringify(el.name);
+            })
+
+        })
+
+    }
+</script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+<script src="../server/firebase.main.js"></script>
+</body>
+</html>

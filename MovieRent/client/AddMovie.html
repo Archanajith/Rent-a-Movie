@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Add Movie</title>
+</head>
+<body>
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="index-banner">
+
+    <div class="container">
+        <h1 class="header center black-text text-lighten-2">Add Movie</h1>
+    </div>
+</div>
+<div class="container">
+    <form class="col s12" id="reg-form">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="name" type="text" class="validate" required>
+                <label for="name">Name of the Movie</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="description" type="text" class="validate" required>
+                <label for="description">Description of the movie</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="director" type="text" class="validate" required>
+                <label for="director">Director</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="actors" type="text" class="validate" required>
+                <label for="actors">Actors</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="year" type="text" class="validate" required>
+                <label for="year">Year</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="rating" type="text" class="validate" required>
+                <label for="rating">Rating</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="production_house" type="text" class="validate" required>
+                <label for="production_house">Production House</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <input id="genre" type="text" class="validate" required>
+                <label for="genre">Genre</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <input id="genre2" type="text" class="validate" required>
+                <label for="genre">Genre</label>
+            </div>
+        </div>
+
+        <div class="input-field col s6">
+            <a class="waves-effect waves-light btn" onclick="addMovie()">Add</a>
+        </div>
+    </form>
+</div>
+
+</div>
+<!-- <a title="Login" class="ngl btn-floating btn-large waves-effect waves-light red"><i class="material-icons">input</i></a>-->
+</div>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => appLogout());
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    function addMovie() {
+        let name = document.getElementById("name").value;
+        let description = document.getElementById("description").value;
+        let actors = document.getElementById("actors").value;
+        let director = document.getElementById("director").value;
+        let year = document.getElementById("year").value;
+        let rating = document.getElementById("rating").value;
+        let production_house = document.getElementById("production_house").value;
+        let genre = document.getElementById("genre").value;
+        let genre2 = document.getElementById("genre2").value;
+
+        var data = {
+            "name": name,
+            "description": description,
+            "actors": actors,
+            "director": director,
+            "year": year,
+            "rating": rating,
+            "genre": genre,
+            "genre2": genre2,
+            "production_house": production_house
+        };
+        fetch('http://localhost:3002/api/postMovieData', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then((data) => {
+            console.log(data)
+        })
+    }
+</script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+</body>
+</html>

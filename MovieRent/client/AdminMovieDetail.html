@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Movie Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body onload=" getMovieDetails()">
+<nav class="black">
+    <div class="nav-wrapper">
+        <a href="./index.html" class="brand-logo">Rent-a-Movie</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a id="appLogout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="section">
+        <h6 class="header center black-text text-lighten-2">Buy Movies</h6>
+        <div class="row">
+            Movie Name
+            <div class="input-field inline">
+                <input id="movieName" type="text" class="validate">
+            </div>
+
+        </div>
+        <div class="row">
+            Actor
+            <div class="input-field inline">
+                <input id="actor" type="text" class="validate">
+            </div>
+        </div>
+        <div class="row">
+            <a class="waves-effect waves-light btn" onclick="deleteOrder()">Remove</a>
+            <a class="waves-effect waves-light btn" onclick="updateOrder()">Update</a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //thi value from local torage 5deacce7507a88a62fa1579e
+  
+
+    function loadMovie(movieId) {
+        console.log("in the move")
+        var id = {"id": movieId};
+
+        fetch('http://localhost:3002/api/getMoviesById', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(id)
+        }).then(function (response) {
+            //console.log(response);
+            return response.json();
+        }).then(function (data) {
+            console.log(data[0]);
+            // console.log(data[0]);
+            document.getElementById("movieName").value = data[0].name;
+            document.getElementById("actor").value = data[0].actors;
+        })
+
+    }
+
+    function deleteOrder() {
+     
+        const movieRef = sessionStorage.getItem("movieId");
+        
+        
+        var data = {
+            "id": movieRef,        
+        }
+
+        fetch('http://localhost:3002/api/deleteMovie', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            console.log(response);
+            //return response.json();
+            alert("Deleted The Movie!");
+        })
+    }
+
+    function updateOrder() {
+        const actor = document.getElementById("actor").value;
+        const movieRef = sessionStorage.getItem("movieId");
+        const movieName = document.getElementById("movieName").value;
+        
+        var data = {
+            "actors": actor,
+            "id": movieRef,
+            "name": movieName,
+          
+        }
+
+        fetch('http://localhost:3002/api/updateMovieData', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            alert("Updated the Movie");
+            console.log(response);
+            //return response.json();
+        })
+    }
+</script>
+<script>
+    function getMovieDetails() {
+        let movieId = sessionStorage.getItem("movieId");
+        let movieName = document.getElementById("movieName");
+        movieName.value = movieId;
+        document.getElementById("movieName").classList.add("active");
+        loadMovie(movieId);
+        //loadMovie("5dee90944bcff93a967444bf");
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.getElementById("appLogout")
+        .addEventListener("click", () => {
+            appLogout();
+            window.location.href = './index.html';
+        });
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+</body>
+
+</html>
